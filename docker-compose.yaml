@@ -52,7 +52,9 @@ services:
     entrypoint: docker/entrypoints/rails.sh
     command: ["bundle", "exec", "rails", "s", "-p", "3000", "-b", "0.0.0.0"]
     ports:
-      - "3000:3000"
+      # Bind to loopback only: nginx (upstream 127.0.0.1:3000) terminates TLS
+      # and proxies here. Rails must never be reachable from the internet directly.
+      - "127.0.0.1:3000:3000"
     mem_limit: 1400m
 
   sidekiq:
