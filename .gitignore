@@ -1,0 +1,9 @@
+# secrets — never commit
+.env
+.env.*
+!.env.example
+# local backups
+*.bak
+# runtime data
+data/
+storage/
